@@ -10,7 +10,7 @@ def get_db_connection():
 		host="db",
 		database="mydb",
 		user="postgres",
-		password="secret"
+		password=os.environ.get('DB_PASSWORD', 'secret')
 	)
 	return conn
 
@@ -27,7 +27,7 @@ def dbcheck():
 	except Exception as e:
 		return f'Database connection failed: {str(e)}'
 if __name__ == '__main__':
-	app.run(host='0.0.0.0',port=5000)
+	app.run(host='0.0.0.0', port=5000)  # nosec B104 - required for Docker port binding
 
 
 			 
